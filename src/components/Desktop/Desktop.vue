@@ -29,17 +29,8 @@
         <ContextMenu v-if="context_menu_show&&($store.state.current_focus==='ContextMenu')"/>
         <ContextMenuBottomBar v-if="context_menu_show&&($store.state.current_focus==='ContextMenuBottomBar')" :mode="$store.state.context_menu_bottom_bar_display_mode" :target="$store.state.context_menu_bottom_bar_show_target"/>
       </div>
-      <div class="tw-absolute tw-flex tw-flex-row" style="height: calc(100% - 20px)">
+      <div class="tw-absolute tw-w-1" style="height: calc(100% - 20px)">
         <DesktopFileArray :filemap="map"/>
-        <!-- Minecraft Desktop Icon -->
-        <div class="tw-flex tw-flex-col tw-items-start tw-justify-start tw-pt-2 tw-pl-2" style="pointer-events: auto;">
-          <div class="tw-flex tw-flex-col tw-items-center tw-cursor-pointer tw-select-none tw-p-2 tw-rounded-lg hover:tw-bg-white hover:tw-bg-opacity-20 tw-transition-all" 
-               style="width: 80px;"
-               @dblclick="openMinecraft">
-            <img src="../../assets/images/icons/minecraft.png" class="tw-w-12 tw-h-12 tw-mb-1"/>
-            <span class="tw-text-white tw-text-xs tw-font-bold tw-text-center" style="text-shadow: 1px 1px 2px black;">Minecraft</span>
-          </div>
-        </div>
       </div>
       <BottomBar v-if="true"/>
       <SideBar/>
