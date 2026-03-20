@@ -71,7 +71,7 @@ export default {
       has_browser:false,
       has_settings:false,
       has_terminal:false,
-      has_vscode:false
+      has_vscode:false,
       has_minecraft:false
     }
   },

@@ -72,10 +72,6 @@ const store = new Vuex.Store({
         obj.fixedsize=false
       }
       state.window_list.push(obj)
-      // DELETE_OLD_VSCODE
-        obj.type="vscode"
-      }
-      state.window_list.push(obj)
       this.commit('refresh_window_focus', {uuid:new_uuid})
 
       // refresh initialize position
@@ -170,7 +166,7 @@ const store = new Vuex.Store({
       state.scrollWidth = document.documentElement.scrollWidth || document.body.scrollWidth
     },
     get_auth_status(state){
-      if (Vue.prototype.$cookies.get('auth') == 'true'){
+      if (Vue.prototype..get('auth') == 'true'){
         state.authed = true
       } else {
         state.authed = false
@@ -178,17 +174,17 @@ const store = new Vuex.Store({
     },
     set_auth_status(state , data){
       if (data == true) {
-        Vue.prototype.$cookies.set('auth',"true",'10m')
+        Vue.prototype..set('auth',"true",'10m')
         this.commit('get_login_status')
       }
     },
     set_darkmode(state) {
       state.theme='dark'
-      Vue.prototype.$cookies.set('theme',state.theme,'720d')
+      Vue.prototype..set('theme',state.theme,'720d')
     },
     set_lightmode(state) {
       state.theme='light'
-      Vue.prototype.$cookies.set('theme',state.theme,'720d')
+      Vue.prototype..set('theme',state.theme,'720d')
     },
     change_side_bar_status(state){
       state.show_sidebar = !state.show_sidebar

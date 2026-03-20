@@ -349,7 +349,7 @@ export default {
       // 目前使用模拟数据
     },
     mr_clicked() {
-      this..commit('show_context_menu')
+      this.$store.commit('show_context_menu')
     }
   }
 }
