@@ -70,6 +70,8 @@ const store = new Vuex.Store({
         obj.type="minecraft"
         obj.default_width=900
         obj.fixedsize=false
+        obj.spx=80
+        obj.spy=80
       }
       state.window_list.push(obj)
       this.commit('refresh_window_focus', {uuid:new_uuid})
