@@ -16,6 +16,7 @@
         <WindowMusic v-if="item.type==='music'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :zindex="item.zindex" :default_width="item.default_width" :default_height="item.default_height" :fixedsize="item.fixedsize" :minimized="item.minimized"/>
         <WindowSetting v-if="item.type==='settings'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :zindex="item.zindex" :minimized="item.minimized"/>
         <WindowTerminal v-if="item.type==='terminal'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :zindex="item.zindex" :minimized="item.minimized"/>
+        <WindowMinecraft v-if="item.type==='minecraft'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :zindex="item.zindex" :minimized="item.minimized"/>
       </div>
     </div>
     <div ref="realbackground" class="tw-absolute tw-w-full tw-h-full realbackground" style="top:0;left:0" @contextmenu.prevent="bg_mr_clicked">
@@ -46,6 +47,7 @@ import WindowMusic from '../WindowChildren/WindowMusic.vue'
 import WindowVSCode from '../WindowChildren/WindowVSCode.vue'
 import WindowText from '../WindowChildren/WindowText.vue'
 import WindowTerminal from '../WindowChildren/WindowTerminal.vue'
+import WindowMinecraft from '../WindowChildren/WindowMinecraft.vue'
 import WindowBrowser from '../WindowChildren/WindowBrowser.vue'
 import WindowSetting from '../WindowChildren/WindowSetting.vue'
 import KeyBoard from '../Keyboard/KeyBoard.vue'
@@ -68,6 +70,7 @@ export default {
     KeyBoard,
     KeyBoardMoveIcon,
     WindowTerminal,
+    WindowMinecraft,
     ContextMenu,
     ContextMenuBottomBar
   },

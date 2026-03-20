@@ -72,6 +72,7 @@ export default {
       has_settings:false,
       has_terminal:false,
       has_vscode:false
+      has_minecraft:false
     }
   },
   created(){
@@ -104,8 +105,10 @@ export default {
         settings:false,
         terminal:false,
         vscode:false,
+        minecraft:false,
       }
       let keys = Object.keys(status)
+      // Add minecraft if not in status
       for (let item of this.$store.state.window_list) {
         if (keys.indexOf(item.type) >= 0) {
           status[item.type] = true

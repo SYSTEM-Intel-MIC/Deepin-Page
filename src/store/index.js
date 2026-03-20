@@ -66,6 +66,14 @@ const store = new Vuex.Store({
         obj.type="terminal"
       } else if (payload.type === 'vscode') {
         obj.type="vscode"
+      } else if (payload.type === 'minecraft') {
+        obj.type="minecraft"
+        obj.default_width=900
+        obj.fixedsize=false
+      }
+      state.window_list.push(obj)
+      // DELETE_OLD_VSCODE
+        obj.type="vscode"
       }
       state.window_list.push(obj)
       this.commit('refresh_window_focus', {uuid:new_uuid})
