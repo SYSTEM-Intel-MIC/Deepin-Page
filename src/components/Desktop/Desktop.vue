@@ -5,10 +5,10 @@
         <img src="../../assets/images/desktop_1.jpg" alt="" class="tw-absolute tw-h-full tw-object-cover" @load="bgloaded"/>
       </div>
     </div>
-    <div ref="frontground" class="tw-absolute tw-w-full tw-h-full tw-z-10 tw-overflow-hidden" style="top:0;left:0;pointer-events:auto">
+    <div ref="frontground" class="tw-absolute tw-w-full tw-h-full tw-z-10 tw-overflow-hidden" style="top:0;left:0;pointer-events:none">
       
       <WindowMusic v-if="false"/>
-      <div v-for="item in window_list" :key="item.uuid"> 
+      <div v-for="item in window_list" :key="item.uuid" style="pointer-events:auto;"> 
         <WindowFolder v-if="item.type==='explorer'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :filemap="map" :openpath="item.openpath" :zindex="item.zindex" :minimized="item.minimized"/>
         <WindowText v-if="item.type==='text'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :filesrc="item.filesrc" :filename="item.filename" :size="item.size" :zindex="item.zindex" :minimized="item.minimized"/>
         <WindowBrowser v-if="item.type==='browser'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :zindex="item.zindex" :default_width="item.default_width" :minimized="item.minimized"/>
@@ -25,20 +25,20 @@
           <KeyBoardMoveIcon @mousedown.native="keyboard_move_down"/>
           <KeyBoard  :mode="'desktop'" @vkey_pressed="vkey_pressed" />
         </div>
-        <!-- <div v-for="item in window_list" :key="item.uuid"> {{item}} </div> -->
+        <!-- <div v-for="item in window_list" :key="item.uuid" style="pointer-events:auto;"> {{item}} </div> -->
         <ContextMenu v-if="context_menu_show&&($store.state.current_focus==='ContextMenu')"/>
         <ContextMenuBottomBar v-if="context_menu_show&&($store.state.current_focus==='ContextMenuBottomBar')" :mode="$store.state.context_menu_bottom_bar_display_mode" :target="$store.state.context_menu_bottom_bar_show_target"/>
       </div>
-      <div class="tw-absolute tw-w-1" style="height: calc(100% - 20px)">
+      <div class="tw-absolute tw-flex tw-flex-row" style="height: calc(100% - 20px)">
         <DesktopFileArray :filemap="map"/>
-      </div>
-      <div class="tw-absolute" style="height: calc(100% - 20px); left: 80px;">
         <!-- Minecraft Desktop Icon -->
-        <div class="tw-flex tw-flex-col tw-items-center tw-cursor-pointer tw-select-none tw-p-2 tw-rounded-lg hover:tw-bg-white hover:tw-bg-opacity-20 tw-transition-all" 
-             style="width: 80px;"
-             @dblclick="openMinecraft">
-          <img src="../../assets/images/icons/minecraft.png" class="tw-w-12 tw-h-12 tw-mb-1"/>
-          <span class="tw-text-white tw-text-xs tw-font-bold tw-text-center tw-drop-shadow-md" style="text-shadow: 1px 1px 2px black;">Minecraft</span>
+        <div class="tw-flex tw-flex-col tw-items-start tw-justify-start tw-pt-2 tw-pl-2" style="pointer-events: auto;">
+          <div class="tw-flex tw-flex-col tw-items-center tw-cursor-pointer tw-select-none tw-p-2 tw-rounded-lg hover:tw-bg-white hover:tw-bg-opacity-20 tw-transition-all" 
+               style="width: 80px;"
+               @dblclick="openMinecraft">
+            <img src="../../assets/images/icons/minecraft.png" class="tw-w-12 tw-h-12 tw-mb-1"/>
+            <span class="tw-text-white tw-text-xs tw-font-bold tw-text-center" style="text-shadow: 1px 1px 2px black;">Minecraft</span>
+          </div>
         </div>
       </div>
       <BottomBar v-if="true"/>
