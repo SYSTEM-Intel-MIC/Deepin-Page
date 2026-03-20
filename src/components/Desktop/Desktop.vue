@@ -5,7 +5,7 @@
         <img src="../../assets/images/desktop_1.jpg" alt="" class="tw-absolute tw-h-full tw-object-cover" @load="bgloaded"/>
       </div>
     </div>
-    <div ref="frontground" class="tw-absolute tw-w-full tw-h-full tw-z-10 tw-overflow-hidden" style="top:0;left:0;pointer-events:none">
+    <div ref="frontground" class="tw-absolute tw-w-full tw-h-full tw-z-10 tw-overflow-hidden" style="top:0;left:0;pointer-events:auto">
       
       <WindowMusic v-if="false"/>
       <div v-for="item in window_list" :key="item.uuid"> 
@@ -31,6 +31,15 @@
       </div>
       <div class="tw-absolute tw-w-1" style="height: calc(100% - 20px)">
         <DesktopFileArray :filemap="map"/>
+      </div>
+      <div class="tw-absolute" style="height: calc(100% - 20px); left: 80px;">
+        <!-- Minecraft Desktop Icon -->
+        <div class="tw-flex tw-flex-col tw-items-center tw-cursor-pointer tw-select-none tw-p-2 tw-rounded-lg hover:tw-bg-white hover:tw-bg-opacity-20 tw-transition-all" 
+             style="width: 80px;"
+             @dblclick="openMinecraft">
+          <img src="../../assets/images/icons/minecraft.png" class="tw-w-12 tw-h-12 tw-mb-1"/>
+          <span class="tw-text-white tw-text-xs tw-font-bold tw-text-center tw-drop-shadow-md" style="text-shadow: 1px 1px 2px black;">Minecraft</span>
+        </div>
       </div>
       <BottomBar v-if="true"/>
       <SideBar/>
