@@ -97,25 +97,25 @@ export default {
       if (this.has_terminal) {
         this.$store.commit('switch_global_window_show_status', {'type':'terminal'});
       } else {
-        this.$store.commit('open_new_window', {'type':'terminal'}); // 关键修改：使用 Vuex 管理窗口
+        this.$store.commit('open_new_window', {'type':'terminal'}); 
       }
       this.$store.commit('refresh_window_focus', {'type':'terminal'});
-      this.$store.commit('clear_context_menu'); // 或 hide_context_menu
+      this.$store.commit('clear_context_menu'); 
     },
     
     settings_clicked() {
       if (this.has_settings) {
         this.$store.commit('switch_global_window_show_status', {'type':'settings'});
       } else {
-        this.$store.commit('open_new_window', {'type':'settings'}); // 关键修改：使用 Vuex 管理窗口
+        this.$store.commit('open_new_window', {'type':'settings'}); 
       }
       this.$store.commit('refresh_window_focus', {'type':'settings'});
       this.$store.commit('clear_context_menu'); // 或 hide_context_menu
     },
     
     old_website() {
-      window.open("https://old.rainy.me", "_blank");
-      this.$store.commit('clear_context_menu'); // 或 hide_context_menu
+      window.open("/index.html", "_blank");
+      this.$store.commit('clear_context_menu'); 
     }
   },
   
