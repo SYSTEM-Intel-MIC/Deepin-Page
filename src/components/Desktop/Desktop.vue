@@ -5,10 +5,10 @@
         <img src="../../assets/images/desktop_1.jpg" alt="" class="tw-absolute tw-h-full tw-object-cover" @load="bgloaded"/>
       </div>
     </div>
-    <div ref="frontground" class="tw-absolute tw-w-full tw-h-full tw-z-10 tw-overflow-hidden" style="top:0;left:0;pointer-events:auto">
-      
+    <!-- 前景窗口容器：穿透鼠标事件，让桌面空白区域可点击 -->
+    <div ref="frontground" class="tw-absolute tw-w-full tw-h-full tw-z-10 tw-overflow-hidden" style="top:0;left:0;pointer-events:none">
       <WindowMusic v-if="false"/>
-      <div v-for="item in window_list" :key="item.uuid" style="pointer-events:auto;"> 
+      <div v-for="item in window_list" :key="item.uuid" style="pointer-events:auto"> 
         <WindowFolder v-if="item.type==='explorer'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :filemap="map" :openpath="item.openpath" :zindex="item.zindex" :minimized="item.minimized"/>
         <WindowText v-if="item.type==='text'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :filesrc="item.filesrc" :filename="item.filename" :size="item.size" :zindex="item.zindex" :minimized="item.minimized"/>
         <WindowBrowser v-if="item.type==='browser'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :zindex="item.zindex" :default_width="item.default_width" :minimized="item.minimized"/>
@@ -19,16 +19,19 @@
         <WindowMinecraft v-if="item.type==='minecraft'" :uuid='item.uuid' :startpos_x="item.spx" :startpos_y="item.spy" :zindex="item.zindex" :minimized="item.minimized"/>
       </div>
     </div>
-    <div ref="realbackground" class="tw-absolute tw-w-full tw-h-full realbackground" style="top:0;left:0" @contextmenu.prevent="bg_mr_clicked">
-      <div class="tw-absolute tw-w-full " @click="background_clicked" style="pointer-events:auto;height: calc(100% - 100px)">
-        <div ref="keyboard_div" class="tw-absolute " style="z-index:1001;width:600px;height:200px;top:0px;left:0px" v-if="desktop_keyboard_show">
+    <!-- 背景：处理桌面右键、左键和文件图标 -->
+    <div ref="realbackground" class="tw-absolute tw-w-full tw-h-full realbackground" style="top:0;left:0" @contextmenu.prevent="bg_mr_clicked" @click="background_clicked">
+      <!-- 透明点击区域：用于接收背景点击，但让文件图标穿透 -->
+      <div class="tw-absolute tw-w-full " style="pointer-events:none;height: calc(100% - 100px)">
+        <div ref="keyboard_div" class="tw-absolute " style="z-index:1001;width:600px;height:200px;top:0px;left:0px;pointer-events:auto" v-if="desktop_keyboard_show">
           <KeyBoardMoveIcon @mousedown.native="keyboard_move_down"/>
-          <KeyBoard  :mode="'desktop'" @vkey_pressed="vkey_pressed" />
+          <KeyBoard :mode="'desktop'" @vkey_pressed="vkey_pressed" />
         </div>
-        <!-- <div v-for="item in window_list" :key="item.uuid" style="pointer-events:auto;"> {{item}} </div> -->
-        <ContextMenu v-if="context_menu_show&&($store.state.current_focus==='ContextMenu')"/>
-        <ContextMenuBottomBar v-if="context_menu_show&&($store.state.current_focus==='ContextMenuBottomBar')" :mode="$store.state.context_menu_bottom_bar_display_mode" :target="$store.state.context_menu_bottom_bar_show_target"/>
+        <!-- 右键菜单组件，需要可交互 -->
+        <ContextMenu v-if="context_menu_show&&($store.state.current_focus==='ContextMenu')" style="pointer-events:auto"/>
+        <ContextMenuBottomBar v-if="context_menu_show&&($store.state.current_focus==='ContextMenuBottomBar')" :mode="$store.state.context_menu_bottom_bar_display_mode" :target="$store.state.context_menu_bottom_bar_show_target" style="pointer-events:auto"/>
       </div>
+      <!-- 桌面文件区域 -->
       <div class="tw-absolute tw-w-1" style="height: calc(100% - 20px)">
         <DesktopFileArray :filemap="map"/>
       </div>
